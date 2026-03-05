@@ -5,13 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gift 1 🎁</title>
 <style>
-  body {display:flex; justify-content:center; align-items:center; height:100vh; background:#ff0; font-family:sans-serif; margin:0; text-align:center;}
-  h1 {font-size:3rem;}
+  /* Royal background and style */
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #2c003e, #10001a);
+    font-family: 'Georgia', serif;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 12px gold;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  /* Carousel container */
+  .carousel-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    animation: rotate 15s linear infinite;
+  }
+
+  /* Carousel images */
+  .carousel-container img {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid gold;
+    box-shadow: 0 0 20px gold;
+    transition: transform 1s;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 </style>
 </head>
 <body>
-  <div>
-    <h1>🎉 Happy Day 1! Here's your first gift, Kittu! 🎁</h1>
-  </div>
+
+<div>
+  <h1>🎉 Happy Day 1, Kittu! Your Royal Gift Awaits 🎁</h1>
+  <div class="carousel-container" id="carousel"></div>
+</div>
+
+<script>
+  const totalImages = 15;
+  const carousel = document.getElementById('carousel');
+  const radius = 180; // radius of circular path
+  const centerX = 200;
+  const centerY = 200;
+
+  // Add 15 images from images/ folder
+  for(let i=1; i<=totalImages; i++){
+    const img = document.createElement('img');
+    img.src = `images/gift1-${i}.jpg`; // images folder
+    img.id = `img${i}`;
+    carousel.appendChild(img);
+  }
+
+  function positionImages() {
+    const images = carousel.querySelectorAll('img');
+    const angleStep = (2 * Math.PI) / totalImages;
+
+    images.forEach((img, index) => {
+      const angle = index * angleStep;
+      const x = centerX + radius * Math.cos(angle) - img.width/2;
+      const y = centerY + radius * Math.sin(angle) - img.height/2;
+      img.style.left = x + 'px';
+      img.style.top = y + 'px';
+    });
+  }
+
+  positionImages();
+
+  // Automatic rotation every 15 seconds
+  let rotation = 0;
+  setInterval(() => {
+    rotation += (360 / totalImages);
+    carousel.style.transform = `rotate(${rotation}deg)`;
+  }, 15000);
+
+</script>
+
 </body>
 </html>
