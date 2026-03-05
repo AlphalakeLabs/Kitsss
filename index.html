@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kittu's Birthday Countdown 🎉</title>
+<style>
+  /* Body and background */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Countdown box */
+  .countdown {
+    background: rgba(0,0,0,0.3);
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px #fff;
+    animation: glow 2s infinite alternate;
+    z-index: 10;
+    position: relative;
+  }
+
+  .countdown h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px #000;
+  }
+
+  .days {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #fffb00;
+    animation: rainbow 3s infinite linear;
+  }
+
+  @keyframes rainbow {
+    0% { color: #ff0000; }
+    20% { color: #ff7f00; }
+    40% { color: #ffff00; }
+    60% { color: #00ff00; }
+    80% { color: #0000ff; }
+    100% { color: #8b00ff; }
+  }
+
+  @keyframes glow {
+    0% { box-shadow: 0 0 20px #fff; }
+    50% { box-shadow: 0 0 40px #ff0; }
+    100% { box-shadow: 0 0 20px #fff; }
+  }
+
+  /* Confetti style */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    top: 0;
+    animation: fall 3s linear infinite;
+    z-index: 5;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Countdown Container -->
+<div class="countdown">
+  <h1>Kittu's Birthday Countdown 🎉</h1>
+  <div class="days" id="days">17</div>
+  <div>Days Left!</div>
+</div>
+
+<script>
+  // Set birthday date: 22nd March
+  const birthday = new Date();
+  birthday.setFullYear(new Date().getFullYear()); // this year
+  birthday.setMonth(2); // March (0 = Jan)
+  birthday.setDate(22);
+  birthday.setHours(0,0,0,0); // midnight
+
+  const daysEl = document.getElementById('days');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = birthday - now;
+
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    daysEl.textContent = daysLeft > 0 ? daysLeft : 0;
+
+    // If countdown reaches 0, start confetti
+    if(daysLeft <= 0 && !document.getElementById('confetti-started')) {
+      startConfetti();
+    }
+  }
+
+  setInterval(updateCountdown, 1000);
+
+  // Confetti function
+  function startConfetti() {
+    const confettiContainer = document.body;
+    const confettiCount = 100;
+    for(let i=0; i<confettiCount; i++){
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor = getRandomColor();
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+      confettiContainer.appendChild(confetti);
+    }
+    const marker = document.createElement('div');
+    marker.id = 'confetti-started';
+    confettiContainer.appendChild(marker);
+  }
+
+  function getRandomColor() {
+    const colors = ['#ff0','#f00','#0f0','#0ff','#00f','#f0f','#ff7f00','#8b00ff'];
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
+
+</script>
+
+</body>
+</html>
