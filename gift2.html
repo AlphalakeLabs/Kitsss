@@ -13,6 +13,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
   background:radial-gradient(circle at center,#2c003e,#10001a);
   font-family:'Georgia',serif;
   color:#fff;
@@ -23,37 +24,36 @@ h1{
   font-size:3rem;
   text-shadow:2px 2px 12px gold;
   text-align:center;
-  margin-bottom:50px;
+  margin-bottom:40px;
 }
 
-/* carousel container */
+/* slideshow box */
 
-.carousel-container{
+.slideshow{
   position:relative;
-  width:500px;
-  height:500px;
+  width:400px;
+  height:400px;
 }
 
 /* images */
 
-.carousel-container img{
+.slideshow img{
   position:absolute;
-  width:120px;
-  height:120px;
-  border-radius:50%;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:20px;
   border:4px solid gold;
-  box-shadow:0 0 20px gold;
+  box-shadow:0 0 30px gold;
 
   opacity:0;
-  transform:scale(0.5);
-  transition:opacity 1.5s ease, transform 1.5s ease;
+  transition:opacity 2s ease-in-out;
 }
 
-/* visible class */
+/* visible image */
 
-.carousel-container img.show{
+.slideshow img.active{
   opacity:1;
-  transform:scale(1);
 }
 
 </style>
@@ -61,66 +61,41 @@ h1{
 
 <body>
 
-<div>
 <h1>🎉 Happy Day 1, Kittu! Your Royal Gift Awaits 🎁</h1>
-<div class="carousel-container" id="carousel"></div>
-</div>
+
+<div class="slideshow" id="slideshow"></div>
 
 <script>
 
 const totalImages = 15;
-const carousel = document.getElementById('carousel');
+const slideshow = document.getElementById("slideshow");
 
-const radius = 180;
-const centerX = 200;
-const centerY = 200;
-
-/* create images */
+/* load images */
 
 for(let i=1;i<=totalImages;i++){
 
-  const img=document.createElement('img');
-  img.src=`images/gift1-${i}.jpg`;
-  carousel.appendChild(img);
+  const img = document.createElement("img");
+  img.src = `images/gift1-${i}.jpg`;
 
+  if(i===1) img.classList.add("active");
+
+  slideshow.appendChild(img);
 }
 
-/* position them in circle */
+const images = slideshow.querySelectorAll("img");
+let index = 0;
 
-function positionImages(){
+/* slideshow */
 
-  const images=carousel.querySelectorAll('img');
-  const angleStep=(2*Math.PI)/totalImages;
+setInterval(()=>{
 
-  images.forEach((img,index)=>{
+  images[index].classList.remove("active");
 
-    const angle=index*angleStep;
+  index = (index + 1) % images.length;
 
-    const x=centerX+radius*Math.cos(angle)-60;
-    const y=centerY+radius*Math.sin(angle)-60;
+  images[index].classList.add("active");
 
-    img.style.left=x+"px";
-    img.style.top=y+"px";
-
-  });
-
-}
-
-positionImages();
-
-/* show images one by one */
-
-const images=carousel.querySelectorAll("img");
-
-images.forEach((img,index)=>{
-
-  setTimeout(()=>{
-
-    img.classList.add("show");
-
-  }, index*1000);   // 1 second delay between images
-
-});
+},3000);
 
 </script>
 
