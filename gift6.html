@@ -1,1 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanmaniye 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --rose: #c0394b;
+    --deep: #6b0a1a;
+    --blush: #f7e0e5;
+    --parchment: #fdf6ec;
+    --ink: #2a1018;
+    --gold: #c9996a;
+  }
+
+  body {
+    min-height: 100vh;
+    background: #0d0509;
+    font-family: 'Lora', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── STARFIELD ── */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle linear infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.4); }
+  }
+
+  /* ── FLOATING PETALS ── */
+  .petals-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    opacity: 0;
+    animation: driftDown linear infinite;
+    font-size: 1.1rem;
+  }
+  @keyframes driftDown {
+    0%   { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    85%  { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(40px); opacity: 0; }
+  }
+
+  /* ── AUDIO ── */
+  #audio { display: none; }
+
+  /* ── MUSIC NOTE INDICATOR ── */
+  .music-note {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 999;
+    font-size: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.6s;
+    animation: noteFloat 2s ease-in-out infinite;
+    display: none;
+  }
+  .music-note.visible { display: block; opacity: 1; }
+  @keyframes noteFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── PHOTO STAGE ── */
+  #photo-stage {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .photo-hint {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: #c9859a;
+    margin-bottom: 28px;
+    text-shadow: 0 0 30px rgba(255,100,130,0.5);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .photo-frame {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .photo-frame:hover { transform: scale(1.03); }
+
+  .photo-border {
+    position: relative;
+    border: 2px solid rgba(201, 153, 106, 0.4);
+    border-radius: 4px;
+    padding: 14px;
+    background: linear-gradient(145deg, rgba(30,10,18,0.95), rgba(50,15,25,0.9));
+    box-shadow:
+      0 0 0 1px rgba(201,153,106,0.15),
+      0 30px 80px rgba(180,20,50,0.4),
+      0 60px 120px rgba(0,0,0,0.7),
+      inset 0 0 40px rgba(180,20,50,0.05);
+  }
+
+  /* Corner ornaments */
+  .photo-border::before,
+  .photo-border::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+  .photo-border::before { top: 6px; left: 10px; }
+  .photo-border::after  { bottom: 6px; right: 10px; }
+
+  .photo-inner {
+    width: 280px;
+    height: 340px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #1a0810 0%, #2d0f1a 50%, #1a0810 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The actual photo — user places their image here */
+  .photo-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.92;
+  }
+
+  /* Overlay glow on hover */
+  .photo-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,100,130,0.18) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .photo-frame:hover .photo-inner::after { opacity: 1; }
+
+  /* Tap to open overlay */
+  .photo-tap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .tap-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.2rem;
+    color: rgba(255,220,230,0.9);
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  }
+
+  .photo-label {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-top: 18px;
+    opacity: 0.8;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── LETTER STAGE ── */
+  #letter-stage {
+    display: none;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    min-height: 100vh;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 50px 16px 70px;
+  }
+  #letter-stage.visible {
+    display: flex;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .letter {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+  }
+
+  /* Paper layers */
+  .letter::before {
+    content: '';
+    position: absolute;
+    inset: 6px -4px -4px;
+    background: #e8c4bc;
+    border-radius: 3px;
+    z-index: -1;
+    opacity: 0.5;
+  }
+  .letter::after {
+    content: '';
+    position: absolute;
+    inset: 3px -2px -2px;
+    background: #f0d0c5;
+    border-radius: 3px;
+    z-index: -1;
+    opacity: 0.7;
+  }
+
+  .letter-paper {
+    background: var(--parchment);
+    background-image:
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(200,160,170,0.18) 31px,
+        rgba(200,160,170,0.18) 32px
+      );
+    border-radius: 3px;
+    padding: 52px 40px 48px;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.35),
+      0 60px 120px rgba(180,30,60,0.2),
+      inset 0 0 0 1px rgba(180,120,130,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative corner */
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 50px; height: 50px;
+    background: linear-gradient(225deg, rgba(200,130,150,0.25) 0%, transparent 60%);
+  }
+
+  /* Left margin line */
+  .letter-paper::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 52px;
+    width: 1px;
+    background: rgba(220,160,170,0.3);
+  }
+
+  .letter-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .letter-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.4rem;
+    color: var(--rose);
+    line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(192,57,75,0.3);
+  }
+  .letter-ornament {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    opacity: 0.7;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .letter-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+    opacity: 0.5;
+  }
+
+  .letter-body {
+    font-family: 'Lora', serif;
+    font-size: 1.02rem;
+    line-height: 2.0;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .letter-body p {
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  .letter-body .opener {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    font-style: normal;
+    color: var(--rose);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .highlight {
+    color: var(--rose);
+    font-style: italic;
+  }
+
+  .letter-closing {
+    margin-top: 28px;
+    text-align: right;
+  }
+  .letter-sign {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: var(--rose);
+    display: block;
+    line-height: 1.3;
+  }
+  .letter-hearts {
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    margin-top: 8px;
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  /* ── HEARTS BURST ── */
+  .hearts-burst {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+  }
+  .burst-heart {
+    position: absolute;
+    opacity: 0;
+    animation: burstH 1.8s ease-out forwards;
+  }
+  @keyframes burstH {
+    0%   { transform: translate(0,0) scale(0.3); opacity: 1; }
+    70%  { opacity: 0.9; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.1); opacity: 0; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .letter-paper { padding: 40px 24px 36px; }
+    .photo-inner { width: 240px; height: 290px; }
+    .letter-title { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<audio id="audio" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-note" id="musicNote">🎵</div>
+<div class="stars" id="stars"></div>
+<div class="petals-wrap" id="petals"></div>
+<div class="hearts-burst" id="heartsBurst"></div>
+
+<!-- ── PHOTO STAGE ── -->
+<div id="photo-stage">
+  <p class="photo-hint">✦ for my Kanmani ✦</p>
+
+  <div class="photo-frame" onclick="openLetter()">
+    <div class="photo-border">
+      <div class="photo-inner">
+        <!--
+          ╔══════════════════════════════════════════╗
+          ║  PLACE YOUR GIRLFRIEND'S PHOTO HERE      ║
+          ║  Replace "photo.jpg" with your file name ║
+          ╚══════════════════════════════════════════╝
+        -->
+        <img src="photo.jpg" alt="My Kanmani" onerror="this.style.display='none'; this.parentElement.innerHTML += '<span style=\'color:#c9859a;font-family:Great Vibes,cursive;font-size:1.4rem;opacity:.6;padding:20px;text-align:center;\'>Your photo<br>goes here 💗</span>'">
+        <div class="photo-tap">
+          <span class="tap-text">tap to open ✦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="photo-label">Kanmaniye 💗</p>
+</div>
+
+<!-- ── LETTER STAGE ── -->
+<div id="letter-stage">
+  <div class="letter">
+    <div class="letter-paper">
+      <div class="letter-head">
+        <div class="letter-title">Kanmaniye…</div>
+        <span class="letter-ornament">✦ ✦ ✦</span>
+      </div>
+      <div class="letter-divider"></div>
+
+      <div class="letter-body">
+        <span class="opener">My dearest,</span>
+
+        <p>Once upon a time there was a boy who thought the world was just ordinary. Days came and went, people came and went, and nothing really felt special.</p>
+
+        <p>Then one day, he met a girl.</p>
+
+        <p>She wasn't just another person in the crowd. She had this smile that could calm storms, this voice that could make even the quietest moments feel warm. Slowly, without him even realizing, she became the <span class="highlight">most precious thing</span> in his life.</p>
+
+        <p>One day someone asked him, <em>"Why do you call her Kanmani?"</em></p>
+
+        <p>He smiled and said, <em>"Because <span class="highlight">Kanmani</span> means the jewel of my eye. My eyes protect what they see the most… and my heart protects her even more. She's not just someone I love — she's someone I can't imagine my world without."</em></p>
+
+        <p>And that girl… <span class="highlight">is you.</span></p>
+
+        <p>So <strong>Kanmaniye Kanimaye</strong>, you're not just my girlfriend — you're the little treasure my heart wants to keep forever. ❤️</p>
+      </div>
+
+      <div class="letter-divider"></div>
+
+      <div class="letter-closing">
+        <span class="letter-sign">— always yours 🌹</span>
+        <span class="letter-hearts">💗 ♡ 💗</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Stars ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = 0.5 + Math.random() * 2;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}vh; left:${Math.random()*100}vw;
+      animation-duration:${2+Math.random()*5}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ── Petals ──
+  const petEls = document.getElementById('petals');
+  const petalList = ['🌸','🌺','🌷','✿','❀','💮'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalList[Math.floor(Math.random() * petalList.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}vw;
+      font-size:${0.8+Math.random()*0.8}rem;
+      animation-duration:${14+Math.random()*14}s;
+      animation-delay:${Math.random()*16}s;
+    `;
+    petEls.appendChild(p);
+  }
+
+  // ── Open letter ──
+  function openLetter() {
+    // Play music
+    const audio = document.getElementById('audio');
+    audio.play().then(() => {
+      const note = document.getElementById('musicNote');
+      note.classList.add('visible');
+    }).catch(() => {});
+
+    // Hearts burst
+    burstHearts();
+
+    setTimeout(() => {
+      document.getElementById('photo-stage').style.display = 'none';
+      document.getElementById('letter-stage').classList.add('visible');
+    }, 500);
+  }
+
+  function burstHearts() {
+    const burst = document.getElementById('heartsBurst');
+    const emojis = ['💗','💖','💕','❤️','💓','✨','🌸','🌹'];
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    for (let i = 0; i < 28; i++) {
+      const el = document.createElement('div');
+      el.className = 'burst-heart';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 100 + Math.random() * 260;
+      el.style.cssText = `
+        left:${cx}px; top:${cy}px;
+        font-size:${0.9+Math.random()*1.2}rem;
+        animation-delay:${Math.random()*0.3}s;
+      `;
+      el.style.setProperty('--tx', Math.cos(angle)*dist+'px');
+      el.style.setProperty('--ty', Math.sin(angle)*dist+'px');
+      burst.appendChild(el);
+      setTimeout(() => el.remove(), 2400);
+    }
+  }
+</script>
+</body>
+</html>
