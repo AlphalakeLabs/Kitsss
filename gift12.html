@@ -389,6 +389,11 @@
 </head>
 <body>
 
+<!-- Global background music (plays from quiz start onwards) -->
+<audio id="bgMusic" loop>
+  <source src="song2.mp3" type="audio/mpeg">
+</audio>
+
 <!-- Floating hearts -->
 <div class="hearts-bg" id="heartsBg"></div>
 
@@ -436,9 +441,6 @@
   </div>
   <div class="photo-caption">"Every moment with you is my favourite."</div>
   <button class="btn-next" onclick="goToVideo()">Next →</button>
-  <audio id="bgMusic" loop>
-    <source src="song2.mp3" type="audio/mpeg">
-  </audio>
 </div>
 
 <!-- SCREEN 5: Video -->
@@ -509,6 +511,9 @@
   function startQuiz() {
     showScreen('screen-quiz');
     renderQuestion();
+    const music = document.getElementById('bgMusic');
+    music.volume = 0.7;
+    music.play().catch(() => {});
   }
 
   function renderQuestion() {
@@ -568,9 +573,6 @@
     }, 700);
     setTimeout(() => {
       showScreen('screen-photo');
-      const music = document.getElementById('bgMusic');
-      music.volume = 0.7;
-      music.play().catch(() => {});
     }, 2200);
   }
 
