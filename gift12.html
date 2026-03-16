@@ -575,9 +575,10 @@
   }
 
   function goToVideo() {
-    document.getElementById('bgMusic').pause();
+    // Keep song2.mp3 playing, just mute the video
     showScreen('screen-video');
     const vid = document.getElementById('mainVideo');
+    vid.muted = true;
     setTimeout(() => vid.play().catch(() => {}), 300);
   }
 
