@@ -1,1 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janiya 👑💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Pinyon+Script&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --rose:    #c94070;
+    --deep:    #7a0a2e;
+    --blush:   #fde8f0;
+    --parch:   #fdf5ee;
+    --ink:     #2e0f1c;
+    --gold:    #d4a96a;
+    --cream:   #fff8f2;
+  }
+
+  body {
+    min-height: 100vh;
+    background: #090308;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── STARFIELD ── */
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .star {
+    position: absolute; border-radius: 50%; background: #fff;
+    animation: twinkle linear infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.1; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.5); }
+  }
+
+  /* ── SPARKLES ── */
+  .sparkles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .sparkle {
+    position: absolute; opacity: 0;
+    animation: sparkleFloat linear infinite;
+    font-size: 1rem;
+  }
+  @keyframes sparkleFloat {
+    0%   { transform: translateY(-5vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+  }
+
+  /* ── MUSIC ── */
+  #audio { display: none; }
+  .music-pill {
+    position: fixed; top: 18px; right: 18px; z-index: 999;
+    background: rgba(180,30,70,0.25);
+    border: 1px solid rgba(212,169,106,0.4);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    animation: pillPulse 2.5s ease-in-out infinite;
+  }
+  .music-pill.on { display: flex; }
+  @keyframes pillPulse {
+    0%,100% { box-shadow: 0 0 12px rgba(192,64,112,0.3); }
+    50%      { box-shadow: 0 0 24px rgba(192,64,112,0.7); }
+  }
+
+  /* ── HEARTS BURST ── */
+  .burst { position: fixed; inset: 0; pointer-events: none; z-index: 200; overflow: hidden; }
+  .bh {
+    position: absolute; opacity: 0;
+    animation: burstFly 2s ease-out forwards;
+  }
+  @keyframes burstFly {
+    0%   { transform: translate(0,0) scale(0.2) rotate(0deg); opacity: 1; }
+    80%  { opacity: 0.7; }
+    100% { transform: translate(var(--tx),var(--ty)) scale(1.2) rotate(var(--tr)); opacity: 0; }
+  }
+
+  /* ══════════════════════════
+     PHOTO STAGE
+  ══════════════════════════ */
+  #photo-stage {
+    position: relative; z-index: 10;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .pre-title {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2.2rem;
+    color: #e8a0bc;
+    margin-bottom: 10px;
+    text-shadow: 0 0 40px rgba(255,100,150,0.5);
+    animation: softGlow 3s ease-in-out infinite;
+  }
+  @keyframes softGlow {
+    0%,100% { opacity: 0.7; text-shadow: 0 0 20px rgba(255,100,150,0.3); }
+    50%      { opacity: 1;   text-shadow: 0 0 50px rgba(255,100,150,0.7); }
+  }
+
+  .crown-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+    animation: crownFloat 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(212,169,106,0.8));
+  }
+  @keyframes crownFloat {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-8px) rotate(3deg); }
+  }
+
+  /* Photo frame */
+  .photo-frame {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .photo-frame:hover { transform: scale(1.04) rotate(0.5deg); }
+
+  .frame-outer {
+    padding: 16px;
+    background: linear-gradient(145deg, #1e0912, #3a0f20);
+    border-radius: 6px;
+    border: 1px solid rgba(212,169,106,0.35);
+    box-shadow:
+      0 0 0 1px rgba(212,169,106,0.1),
+      0 40px 90px rgba(180,20,60,0.45),
+      0 80px 140px rgba(0,0,0,0.8),
+      inset 0 0 60px rgba(180,20,50,0.08);
+    position: relative;
+  }
+
+  /* Ornamental corners */
+  .frame-outer::before { content: '✦'; position: absolute; top: 7px;  left:  12px; color: var(--gold); font-size: 0.8rem; opacity: 0.65; }
+  .frame-outer::after  { content: '✦'; position: absolute; bottom: 7px; right: 12px; color: var(--gold); font-size: 0.8rem; opacity: 0.65; }
+  .corner-tl { position: absolute; top: 7px;  right: 12px; color: var(--gold); font-size: 0.8rem; opacity: 0.65; }
+  .corner-br { position: absolute; bottom: 7px; left: 12px; color: var(--gold); font-size: 0.8rem; opacity: 0.65; }
+
+  .photo-inner {
+    width: 268px; height: 324px;
+    overflow: hidden; border-radius: 3px;
+    background: linear-gradient(135deg, #1a0810, #2d0f1a);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .photo-inner img {
+    width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9;
+  }
+  .photo-inner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,100,140,0.15) 0%, transparent 65%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .photo-frame:hover .photo-inner::after { opacity: 1; }
+
+  .tap-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 45%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    padding-bottom: 18px;
+    pointer-events: none;
+  }
+  .tap-text {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.3rem;
+    color: rgba(255,220,235,0.95);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+  }
+
+  .photo-caption {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-top: 20px;
+    opacity: 0.85;
+  }
+
+  /* ══════════════════════════
+     LETTER STAGE
+  ══════════════════════════ */
+  #letter-stage {
+    display: none;
+    position: relative; z-index: 10;
+    width: 100%; min-height: 100vh;
+    align-items: flex-start; justify-content: center;
+    padding: 50px 16px 80px;
+  }
+  #letter-stage.open {
+    display: flex;
+    animation: riseIn 0.9s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .letter-wrap { width: 100%; max-width: 500px; position: relative; }
+
+  /* Stacked paper layers */
+  .paper-shadow-1 {
+    position: absolute; inset: 8px -5px -5px;
+    background: #e2b8c0; border-radius: 4px; z-index: -2; opacity: 0.45;
+  }
+  .paper-shadow-2 {
+    position: absolute; inset: 4px -2.5px -2.5px;
+    background: #eecac4; border-radius: 4px; z-index: -1; opacity: 0.65;
+  }
+
+  .letter-paper {
+    background: var(--parch);
+    background-image:
+      repeating-linear-gradient(
+        transparent, transparent 31px,
+        rgba(200,155,165,0.16) 31px,
+        rgba(200,155,165,0.16) 32px
+      );
+    border-radius: 4px;
+    padding: 56px 44px 52px;
+    box-shadow:
+      0 25px 70px rgba(0,0,0,0.4),
+      0 70px 130px rgba(180,30,65,0.22),
+      inset 0 0 0 1px rgba(180,120,135,0.2);
+    position: relative; overflow: hidden;
+  }
+
+  /* Folded corner */
+  .letter-paper::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 56px; height: 56px;
+    background: linear-gradient(225deg, rgba(200,130,150,0.22) 0%, transparent 60%);
+  }
+
+  /* Margin rule */
+  .letter-paper::after {
+    content: '';
+    position: absolute; top: 0; bottom: 0; left: 56px;
+    width: 1px;
+    background: rgba(210,155,165,0.28);
+  }
+
+  /* ── Crown at top ── */
+  .letter-crown {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .crown-big {
+    font-size: 2.4rem;
+    display: inline-block;
+    filter: drop-shadow(0 0 10px rgba(212,169,106,0.7));
+    animation: crownBob 3s ease-in-out infinite;
+  }
+  @keyframes crownBob {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-6px) rotate(2deg); }
+  }
+
+  .letter-head { text-align: center; margin-bottom: 22px; }
+  .letter-title {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 3rem;
+    color: var(--rose);
+    line-height: 1.1;
+    text-shadow: 0 2px 24px rgba(192,64,112,0.35);
+  }
+  .ornament {
+    color: var(--gold); font-size: 0.9rem;
+    letter-spacing: 0.5em; opacity: 0.65;
+    margin-top: 8px; display: block;
+  }
+
+  .divider {
+    width: 130px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 18px auto; opacity: 0.5;
+  }
+
+  /* ── Body ── */
+  .letter-body {
+    font-size: 1.05rem;
+    line-height: 2.05;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .letter-body p { margin-bottom: 16px; }
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  .opener {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.8rem;
+    color: var(--rose);
+    font-style: normal;
+    display: block;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .hl { color: var(--rose); font-style: italic; }
+  .hl-gold { color: #a0712a; font-style: italic; }
+
+  /* ── Countdown ── */
+  .countdown-box {
+    margin: 24px 0;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(192,64,112,0.07), rgba(212,169,106,0.1));
+    border: 1px solid rgba(212,169,106,0.3);
+    border-radius: 6px;
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(192,64,112,0.06) 0%, transparent 70%);
+  }
+  .countdown-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: var(--rose);
+    font-weight: 600;
+    display: block;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(192,64,112,0.4);
+  }
+  .countdown-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    display: block;
+    margin-top: 6px;
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  /* ── Closing ── */
+  .letter-closing { margin-top: 28px; text-align: right; }
+  .letter-sign {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+    display: block;
+    line-height: 1.3;
+  }
+  .letter-sign-sub {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.4rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+  .heart-row {
+    font-size: 1.1rem;
+    letter-spacing: 0.35em;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .letter-paper { padding: 38px 22px 36px; }
+    .photo-inner  { width: 230px; height: 278px; }
+    .letter-title { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<audio id="audio" loop>
+  <source src="song3.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-pill" id="musicPill">🎵 <span>playing for you</span></div>
+<div class="stars" id="stars"></div>
+<div class="sparkles" id="sparkles"></div>
+<div class="burst" id="burst"></div>
+
+<!-- ════════════════ PHOTO STAGE ════════════════ -->
+<div id="photo-stage">
+
+  <span class="crown-icon">👑</span>
+  <p class="pre-title">for my Janiya…</p>
+
+  <div class="photo-frame" onclick="openLetter()">
+    <div class="frame-outer">
+      <span class="corner-tl">✦</span>
+      <span class="corner-br">✦</span>
+      <div class="photo-inner">
+        <img src="photo.jpg" alt="My Janiya"
+          onerror="this.style.display='none'; this.parentElement.innerHTML += '<span style=\'color:#c9859a;font-family:Pinyon Script,cursive;font-size:1.5rem;opacity:.6;padding:20px;text-align:center;\'>your photo<br>goes here 💗</span>'">
+        <div class="tap-overlay">
+          <span class="tap-text">open for you ✦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="photo-caption">Janiya 👑💗</p>
+
+</div>
+
+<!-- ════════════════ LETTER STAGE ════════════════ -->
+<div id="letter-stage">
+  <div class="letter-wrap">
+    <div class="paper-shadow-1"></div>
+    <div class="paper-shadow-2"></div>
+
+    <div class="letter-paper">
+
+      <!-- Crown -->
+      <div class="letter-crown">
+        <span class="crown-big">👑</span>
+      </div>
+
+      <div class="letter-head">
+        <div class="letter-title">Janiya…</div>
+        <span class="ornament">✦ &nbsp; ✦ &nbsp; ✦</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="letter-body">
+        <span class="opener">Jaaaannn,</span>
+
+        <p>
+          You know when you're just going about your day, doing nothing special — and then you think of someone… and suddenly, everything feels a little warmer?
+          That's you. <span class="hl">That's always you.</span>
+        </p>
+
+        <p>
+          Janiya. Janiiiiya. <em>Areee jannn.</em> Even your name is so pretty it doesn't make sense. Like who said you were allowed to be this cute AND this sweet AND all of this at the same time?
+        </p>
+
+        <p>
+          You're not just my person — you're like my <span class="hl">favourite part of every single day.</span>
+          The thought I wake up to, the thing that makes boring moments not boring anymore.
+          My little <span class="hl-gold">princess</span>, with your crown on and everything.
+        </p>
+
+        <p>
+          And honestly? I don't have the most poetic words or the fanciest lines —
+          I just know that being with you feels like the easiest, most natural thing in the world.
+          Like, oh. <em>This is what it's supposed to feel like.</em>
+        </p>
+
+        <p>
+          So here I am, writing this little letter, just to say:
+          <span class="hl">I see you. I adore you. And I'm so lucky you're mine.</span>
+        </p>
+
+        <!-- Countdown -->
+        <div class="countdown-box">
+          <span class="countdown-num">2</span>
+          <span class="countdown-label">✦ days left to the big day ✦</span>
+        </div>
+
+        <p>
+          Two whole days, jannnn — and I'm already giddy like it's the best thing ever.
+          Because it is. <span class="hl">You are.</span>
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="letter-closing">
+        <span class="letter-sign">love you, my honey pumpkin 🎃💗</span>
+        <span class="letter-sign-sub">— forever yours, always 🌹</span>
+        <span class="heart-row">💗 &nbsp; 👑 &nbsp; 💗</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Stars ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 130; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = 0.4 + Math.random() * 1.8;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      top:${Math.random()*100}vh; left:${Math.random()*100}vw;
+      animation-duration:${2+Math.random()*5}s;
+      animation-delay:${Math.random()*6}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ── Sparkles ──
+  const sparkEl = document.getElementById('sparkles');
+  const sparkList = ['✨','💗','🌸','💖','⭐','🌟','💫','✦'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'sparkle';
+    p.textContent = sparkList[Math.floor(Math.random() * sparkList.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}vw;
+      font-size:${0.7+Math.random()*0.9}rem;
+      animation-duration:${12+Math.random()*16}s;
+      animation-delay:${Math.random()*18}s;
+    `;
+    sparkEl.appendChild(p);
+  }
+
+  // ── Open letter ──
+  function openLetter() {
+    const audio = document.getElementById('audio');
+    audio.play().then(() => {
+      document.getElementById('musicPill').classList.add('on');
+    }).catch(() => {});
+
+    burstHearts();
+
+    setTimeout(() => {
+      document.getElementById('photo-stage').style.display = 'none';
+      document.getElementById('letter-stage').classList.add('open');
+    }, 480);
+  }
+
+  function burstHearts() {
+    const b = document.getElementById('burst');
+    const emojis = ['💗','💖','💕','❤️','💓','✨','🌸','🌹','👑','💝','🌟'];
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    for (let i = 0; i < 36; i++) {
+      const el = document.createElement('div');
+      el.className = 'bh';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist  = 80 + Math.random() * 300;
+      const rot   = (Math.random() - 0.5) * 720;
+      el.style.cssText = `
+        left:${cx}px; top:${cy}px;
+        font-size:${0.8+Math.random()*1.4}rem;
+        animation-delay:${Math.random()*0.35}s;
+      `;
+      el.style.setProperty('--tx', Math.cos(angle)*dist+'px');
+      el.style.setProperty('--ty', Math.sin(angle)*dist+'px');
+      el.style.setProperty('--tr', rot+'deg');
+      b.appendChild(el);
+      setTimeout(() => el.remove(), 2600);
+    }
+  }
+</script>
+</body>
+</html>
