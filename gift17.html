@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 Letters for Janiya 👑</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose: #e8829a;
+  --blush: #f5c6d8;
+  --cream: #fff8f0;
+  --gold: #d4a843;
+  --deep: #6b1f3a;
+  --soft: #c2416a;
+  --petal: #ffe0ec;
+  --lilac: #d9aaff;
+  --sky: #aadeff;
+  --mint: #a8f0d8;
+  --peach: #ffcba4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  cursor: default;
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg,
+    #ff9de2 0%, #ffb3ba 15%, #ffd6a5 30%,
+    #ffffa1 45%, #a8f0d8 60%, #aadeff 75%,
+    #d9aaff 90%, #ff9de2 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating particles */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.5; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+}
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: sparkleAnim 0.8s ease-out forwards;
+  font-size: 1.2rem;
+}
+
+@keyframes sparkleAnim {
+  0%   { transform: scale(0) rotate(0deg); opacity: 1; }
+  50%  { transform: scale(1.4) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg) translateY(-40px); opacity: 0; }
+}
+
+/* ===== GLASS OVERLAY ===== */
+.glass-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(0px);
+}
+
+/* ===== MAIN CONTENT ===== */
+.content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+}
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 50px 20px 30px;
+}
+
+.crown {
+  font-size: 3.5rem;
+  display: block;
+  animation: crownBob 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(212,168,67,0.5));
+}
+
+@keyframes crownBob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-12px) rotate(3deg); }
+}
+
+.hero h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  color: white;
+  text-shadow: 0 2px 20px rgba(107,31,58,0.4), 0 0 60px rgba(255,150,200,0.3);
+  line-height: 1.1;
+  margin: 10px 0 8px;
+}
+
+.hero-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+}
+
+.instruction {
+  margin-top: 18px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 30px;
+  display: inline-block;
+  padding: 8px 24px;
+  font-size: 0.82rem;
+  color: white;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+}
+
+/* ===== ENVELOPE GRID ===== */
+.env-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 24px 60px;
+}
+
+/* ===== SINGLE ENVELOPE ===== */
+.env-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.env-wrap:hover { transform: translateY(-6px) scale(1.04); }
+.env-wrap:hover .envelope { filter: brightness(1.08); }
+
+.env-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 0.95rem;
+  color: white;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  letter-spacing: 0.05em;
+}
+
+/* envelope SVG container */
+.envelope {
+  width: 110px;
+  height: 82px;
+  position: relative;
+  filter: drop-shadow(0 6px 18px rgba(107,31,58,0.3));
+  transition: filter 0.2s;
+}
+
+.envelope svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* opened state */
+.env-wrap.opened .envelope {
+  opacity: 0.6;
+  filter: grayscale(0.3) drop-shadow(0 3px 8px rgba(0,0,0,0.2));
+}
+
+.env-wrap.opened .env-label {
+  opacity: 0.6;
+}
+
+.check-mark {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  background: #4cde9a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: white;
+  font-weight: 700;
+  border: 2px solid white;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s 0.2s;
+  z-index: 2;
+}
+
+.env-wrap.opened .check-mark {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* envelope colors */
+.env-colors {
+  --e1:  #ff9de2; --e2:  #ffb347; --e3:  #ff6b9d; --e4:  #a8d8ea;
+  --e5:  #ffd700; --e6:  #98fb98; --e7:  #ff8c94; --e8:  #dda0dd;
+  --e9:  #87ceeb; --e10: #f08080; --e11: #90ee90; --e12: #ffb6c1;
+  --e13: #b0e0e6; --e14: #ffa07a; --e15: #c8a2c8; --e16: #ffe4b5;
+  --e17: #ff69b4; --e18: #7ec8e3; --e19: #f4a460; --e20: #d8bfd8; --e21: #ffd700;
+}
+
+/* ===== LETTER MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 16px 40px;
+  background: rgba(80,10,40,0.55);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.letter-card {
+  background: white;
+  border-radius: 4px;
+  max-width: 680px;
+  width: 100%;
+  margin: auto;
+  padding: 56px 52px 44px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,200,220,0.3);
+  transform: translateY(60px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .letter-card {
+  transform: translateY(0) scale(1);
+}
+
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--topbar, linear-gradient(90deg, var(--blush), var(--rose), var(--gold)));
+  border-radius: 4px 4px 0 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #c0607a;
+  line-height: 1;
+  transition: transform 0.2s, color 0.2s;
+  padding: 4px;
+}
+
+.close-btn:hover { transform: rotate(90deg); color: var(--deep); }
+
+.letter-num-badge {
+  position: absolute;
+  top: -16px; left: 48px;
+  background: var(--soft);
+  color: white;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.l-emojis {
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 6px;
+  word-break: break-word;
+  text-align: center;
+}
+
+.l-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--soft);
+  text-align: center;
+  margin: 6px 0 4px;
+}
+
+.l-stars {
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 0.6em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.l-divider {
+  border: none;
+  border-top: 1px solid rgba(232,130,154,0.25);
+  margin: 14px 0 20px;
+}
+
+.l-salutation {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.45rem;
+  color: var(--rose);
+  display: block;
+  margin-bottom: 18px;
+}
+
+.l-body {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.06rem;
+  line-height: 1.95;
+  color: #3e1828;
+  font-weight: 400;
+}
+
+.l-body p { margin-bottom: 15px; }
+.l-body p:last-child { margin-bottom: 0; }
+.l-body em { font-style: italic; color: var(--soft); }
+.l-body strong { font-weight: 600; color: var(--deep); }
+
+.poem-body { text-align: center; }
+.poem-body p { margin-bottom: 10px; line-height: 2.1; }
+.poem-line { display: block; font-style: italic; }
+
+.l-footer {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(232,130,154,0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.l-closing {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.25rem;
+  color: var(--soft);
+}
+
+.l-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.tamil { font-family: 'Dancing Script', cursive; font-size: 1.2em; color: var(--gold); }
+
+/* nav buttons inside modal */
+.modal-nav {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.nav-btn {
+  background: var(--soft);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 28px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.nav-btn:hover { background: var(--deep); transform: scale(1.05); }
+.nav-btn.back { background: rgba(200,100,130,0.2); color: var(--deep); }
+.nav-btn.back:hover { background: rgba(200,100,130,0.4); }
+
+/* music bar */
+.music-bar {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 40px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: white;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: all;
+  white-space: nowrap;
+}
+
+.music-bar.visible { opacity: 1; }
+
+.music-dot {
+  width: 8px; height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50%       { transform: scale(1.5); opacity: 1; }
+}
+
+.music-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.music-bars span {
+  width: 3px;
+  background: white;
+  border-radius: 2px;
+  animation: barBounce 0.8s ease-in-out infinite;
+}
+
+.music-bars span:nth-child(1) { height: 6px; animation-delay: 0s; }
+.music-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+.music-bars span:nth-child(3) { height: 8px; animation-delay: 0.3s; }
+.music-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+.music-bars span:nth-child(5) { height: 5px; animation-delay: 0.25s; }
+
+@keyframes barBounce {
+  0%, 100% { transform: scaleY(0.5); }
+  50%       { transform: scaleY(1); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 500px) {
+  .env-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .letter-card { padding: 48px 22px 32px; }
+  .l-body { font-size: 0.97rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg"></div>
+<div class="particles" id="particles"></div>
+<div class="glass-layer"></div>
+
+<!-- Music -->
+<audio id="audioPlayer" preload="none"></audio>
+
+<!-- Music Bar -->
+<div class="music-bar" id="musicBar">
+  <div class="music-bars">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  🎵 <span id="songLabel">playing song 1</span>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+  <div class="hero">
+    <span class="crown">👑</span>
+    <h1>21 Letters for Janiya</h1>
+    <p class="hero-sub">a birthday unlike any other ✦ all for you</p>
+    <div style="margin-top:12px">
+      <span class="instruction">✉️ click an envelope to open your letter 💌</span>
+    </div>
+  </div>
+
+  <div class="env-grid env-colors" id="envGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="letter-card" id="letterCard">
+    <button class="close-btn" id="closeBtn" aria-label="Close">✕</button>
+    <div id="letterContent"></div>
+    <div class="modal-nav">
+      <button class="nav-btn back" id="backBtn">← back to letters</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== LETTER DATA =====
+const letters = [
+  {
+    emojis: "🎵🌷🌸❀✿💮❀🌸❀💮🌷✿🌷🌷✿💮❀✿🌸💕💗💕💕🌸❤️🌸💕🌸💖🌸🌸✨❤️💕❤️🌸💗💗💖💕💗🌸🌸✨💓💖✨",
+    title: "Kanmaniye…",
+    salutation: "My dearest,",
+    topbar: "linear-gradient(90deg,#ffd6a5,#ff9de2,#ffd6a5)",
+    closing: "— always yours 🌹",
+    tag: "💗 ♡ 💗",
+    body: `<p>Once upon a time there was a boy who thought the world was just ordinary. Days came and went, people came and went, and nothing really felt special.</p>
+<p>Then one day, he met a girl.</p>
+<p>She wasn't just another person in the crowd. She had this smile that could calm storms, this voice that could make even the quietest moments feel warm. Slowly, without him even realizing, she became the most precious thing in his life.</p>
+<p>One day someone asked him, "Why do you call her Kanmani?"</p>
+<p>He smiled and said, <em>"Because Kanmani means the jewel of my eye. My eyes protect what they see the most… and my heart protects her even more. She's not just someone I love — she's someone I can't imagine my world without."</em></p>
+<p>And that girl… is you.</p>
+<p>So <span class="tamil">Kanmaniye Kanimaye</span>, you're not just my girlfriend — you're the little treasure my heart wants to keep forever. ❤️</p>`
+  },
+  {
+    emojis: "🎵💫🌟💗⭐🌸⭐⭐⭐⭐⭐⭐💗⭐🌸🌸🌟💫💗✨🌸✦✨",
+    title: "Janiya…",
+    salutation: "Jaaaannn,",
+    topbar: "linear-gradient(90deg,#ff9de2,#c8a2c8,#ff9de2)",
+    closing: "love you, my honey pumpkin 🎃💗",
+    tag: "💗 👑 💗",
+    body: `<p>You know when you're just going about your day, doing nothing special — and then you think of someone… and suddenly, everything feels a little warmer? That's you. That's <em>always</em> you.</p>
+<p>Janiya. Janiiiiya. Areee jannn. Even your name is so pretty it doesn't make sense. Like who said you were allowed to be this cute AND this sweet AND all of this at the same time?</p>
+<p>You're not just my person — you're like my favourite part of every single day. The thought I wake up to, the thing that makes boring moments not boring anymore. My little princess, with your crown on and everything.</p>
+<p>And honestly? I don't have the most poetic words or the fanciest lines — I just know that being with you feels like the easiest, most natural thing in the world. Like, oh. <em>This is what it's supposed to feel like.</em></p>
+<p>So here I am, writing this little letter, just to say: I see you. I adore you. And I'm so lucky you're mine.</p>`
+  },
+  {
+    emojis: "🫓🌾✨🥥🍃🌶️💛🫓🌾🍃✨🌾🥥💛🫓",
+    title: "The Dosa Devotee 🫓",
+    salutation: "My dearest crispy-dosa-loving girl,",
+    topbar: "linear-gradient(90deg,#ffd6a5,#ffd700,#ffd6a5)",
+    closing: "— yours, always 🌹",
+    tag: "🥥 crispy forever 🥥",
+    body: `<p>I want to talk about something very important. Something that I believe defines a part of your soul. Something you have dedicated a very real piece of your heart to.</p>
+<p>Dosa.</p>
+<p>Jann, the way you look at a fresh golden dosa — crispy at the edges, perfect with coconut chutney — is honestly a little inspiring. That expression? That <em>"yes, this is it, this is life"</em> look? I want you to look at everything in life with that much joy.</p>
+<p>You don't just eat dosa. You <em>experience</em> it. You assess the crispiness. You have opinions about the chutney ratio. You have been known to get genuinely emotional about a good dosa. And honestly? That passion? I love it.</p>
+<p>Because when you love something, you love it fully. With your whole heart. Whether it's dosa, or a place, or a person — you don't do things halfway.</p>
+<p>And I hope on your birthday, wherever you are, you get the most perfect, golden, crackling dosa… and that it tastes exactly like happiness. You deserve that and more, my little dosa queen. 🫓👑</p>`
+  },
+  {
+    emojis: "🏎️💨💗🏎️⭐💗🏎️💨✨🏎️💗⭐🏎️💨💗",
+    title: "The Hotwheels Girl 🏎️",
+    salutation: "Jan, my person,",
+    topbar: "linear-gradient(90deg,#a8d8ea,#aadeff,#a8d8ea)",
+    closing: "— yours, completely 🌹",
+    tag: "💗 vroom vroom 💗",
+    body: `<p>Do you know what I think about when I think about love? Not the dramatic movie kind. Not the grand gestures kind. I think about the day you got me Hotwheels.</p>
+<p>Because you didn't have to. You noticed. You remembered. You went and found it and brought it to me with that little smile like it was nothing — but it was <em>everything.</em></p>
+<p>That's you, Janiya. You love quietly but so, so deeply. You pay attention in ways most people don't. You remember the small things — and then you act on them. And there is nothing, absolutely nothing, more beautiful than being truly seen by someone.</p>
+<p>I have this little car and every time I look at it, I don't just see a toy. I see you. I see the way you love me. I see proof that you are real and that this is real and that I am one of the luckiest people alive.</p>
+<p>Thank you for the Hotwheels. Thank you for seeing me. Thank you for loving me in all those quiet, careful ways that add up to something I'll never stop being grateful for. 🏎️💗</p>`
+  },
+  {
+    emojis: "🌸💗🌸✨🌸💗🌸✨🌸💗🌸✨🌸💗🌸✨🌸💗",
+    title: "Unreasonably Cute 🌸",
+    salutation: "Jann, my little—",
+    topbar: "linear-gradient(90deg,#ff9de2,#ffd700,#ff9de2)",
+    closing: "— helplessly yours 🌹",
+    tag: "🌸 too cute for words 🌸",
+    body: `<p>Okay. I need to say this. Someone has to say it. And that someone is me.</p>
+<p>You are <em>unreasonably</em> cute. Like. Who gave you permission? Who signed off on this? There should be a law.</p>
+<p>The way you make that face when you're trying not to laugh but you're already laughing — cute. The way you pull your sleeves over your hands — cute. The way you get excited about things and you just can't hide it and your whole face lights up — I'm going to need you to stop because it's a lot to handle.</p>
+<p>You don't even try. You just wake up and decide to be the cutest person I've ever seen, and then you walk around like it's completely normal, and somehow nobody has stopped the world to say wait, wait, wait — <em>look at her.</em></p>
+<p>Well. I'm stopping. I'm looking. And I'm saying it: you are the cutest, most adorable, most heart-destroying person in my life. And I wouldn't have it any other way.</p>
+<p>Happy birthday, my little menace. 🌸💗</p>`
+  },
+  {
+    emojis: "🏡🌿🌸✨🌺🏡🌿🌸✨🌺🏡🌿🌸✨🌺🏡",
+    title: "Our House in India 🏡",
+    salutation: "My dreamer,",
+    topbar: "linear-gradient(90deg,#98fb98,#a8f0d8,#98fb98)",
+    closing: "— your future housemate 🌹",
+    tag: "🏡 scenic and modern forever 🌿",
+    body: `<p>I know your dream. You've talked about it with that certain kind of light in your eyes — the one that only comes out when something matters deeply. A house in India. Modern and beautiful. With big windows and the right light and the sound of something green outside.</p>
+<p>I can picture it. Somewhere scenic — maybe hills, maybe the quiet countryside — a place where the mornings feel slow and the evenings feel golden. White walls and warm wood and plants you'll name individually. A kitchen where dosa gets made on Sunday mornings. A little balcony where you sit with chai and just… breathe.</p>
+<p>You deserve that, Jann. Not because it's a nice thing to have — but because you are someone who builds things with love. And a home built by you would feel like the warmest place on earth.</p>
+<p>And I want you to know — that dream isn't just a dream. It's a plan. It's a direction. And someday, those big windows are going to have sunlight pouring through them, and you're going to stand there and smile, and it'll be exactly like you imagined.</p>
+<p>Dream big, my love. Your house is coming. 🌿🏡</p>`
+  },
+  {
+    emojis: "✨👁️‍🗨️💫✨👁️‍🗨️💫✨👁️‍🗨️💫✨👁️‍🗨️💫✨",
+    title: "Those Eyes ✨",
+    salutation: "Janiya,",
+    topbar: "linear-gradient(90deg,#87ceeb,#aadeff,#87ceeb)",
+    closing: "— forever looking 🌹",
+    tag: "✨ i see you ✨",
+    body: `<p>Poets have written about eyes for centuries. Entire songs. Entire novels. And I used to think — isn't that a bit much? They're just eyes.</p>
+<p>And then I looked at yours. And I understood everything.</p>
+<p>Your eyes aren't just pretty. They're expressive in a way that makes words redundant. I can tell when something made you happy before you've said a thing. I can tell when something is secretly funny to you even when you're pretending it isn't. I can tell when you're feeling something deep, something real — because it all lives right there, quietly, in your eyes.</p>
+<p>There's a warmth in them. A softness. Like they were made to make people feel safe. And when they look at me — genuinely, fully — I feel like the most seen person in the world.</p>
+<p>The poets weren't exaggerating. I get it now. Some eyes are just — different. Some eyes hold something you can't quite name but you know you never want to look away from.</p>
+<p>Yours are those eyes, Jann. ✨</p>`
+  },
+  {
+    emojis: "🌾🌿🌸🍃🌾🌿🌸🍃🌾🌿🌸🍃🌾🌿🌸🍃",
+    title: "Running Through Fields 🌾",
+    salutation: "My wild, free girl,",
+    topbar: "linear-gradient(90deg,#dda0dd,#c8a2c8,#dda0dd)",
+    closing: "— running after you 🌹",
+    tag: "🌾 free and golden 🌾",
+    body: `<p>I want you to picture this. An open field. Late afternoon light — the kind that turns everything golden. Wind moving through the grass. And you, running through it, arms out, not a care in the world.</p>
+<p>Because that's who you are at your core, I think. Someone who can run freely. Someone who doesn't hold back. Someone with this incredible energy that, when it's fully unleashed, is the most alive thing I've ever seen.</p>
+<p>There's something about you in motion — laughing, running, just being — that makes the world feel bigger. More possible. Like joy is actually a place you can live in, not just visit.</p>
+<p>I hope you always have fields to run through, Jann. Literally and in every other way. I hope life keeps giving you wide open spaces, adventures, moments where you throw your arms out and feel everything.</p>
+<p>And whenever you run — know that someone is watching with the biggest smile, thinking: <em>there she goes. There's my girl.</em> 🌾💗</p>`
+  },
+  {
+    emojis: "📊✨💼📊✨💼📊✨💼📊✨💼📊✨💼",
+    title: "CMA Janiya 📊",
+    salutation: "Future CMA,",
+    topbar: "linear-gradient(90deg,#b0e0e6,#87ceeb,#b0e0e6)",
+    closing: "— your biggest fan 🌹",
+    tag: "📊 CMA loading… 💼",
+    body: `<p>I want to write this one properly, because it deserves to be said properly.</p>
+<p>Becoming a CMA is not easy. It takes discipline and sacrifice and choosing to sit with textbooks when the world is offering you easier, more comfortable options. It takes believing in yourself on the days when the material is hard and the progress feels slow.</p>
+<p>And you're doing it. You are <em>actually</em> doing it.</p>
+<p>I know there are days it feels heavy. Days when the numbers blur and the concepts pile up and you wonder if it's worth it. On those days, I want you to remember: you chose this. Not because it was easy — but because you are the kind of person who builds real things. Who earns what she has. Who doesn't cut corners.</p>
+<p>CMA Janiya. Can you hear how good that sounds? Because I can. And one day you're going to walk across a stage or open an email or hold a certificate, and it's going to click — <em>I did this.</em></p>
+<p>I'm so proud of you. Not just for the result that's coming — but for the person doing the work right now. 📊💗</p>`
+  },
+  {
+    emojis: "🌺💗🌸💫🌺💗🌸💫🌺💗🌸💫🌺💗🌸💫",
+    title: "Pretty Doesn't Cover It 🌺",
+    salutation: "Janiya,",
+    topbar: "linear-gradient(90deg,#f08080,#ff9de2,#f08080)",
+    closing: "— hopelessly yours 🌹",
+    tag: "🌺 more than words 🌺",
+    body: `<p>People say "you're pretty" like it's a simple thing. A tick-box. A standard compliment you hand out and move on.</p>
+<p>But when I look at you — it's not simple at all.</p>
+<p>You're pretty in the way that stops a moment. In the way that makes everything around you feel a little quieter, like the world paused to frame you properly. You have this quality — this soft, certain kind of beauty — that doesn't shout but it stays. It lingers. Long after you've left a room, something of it remains.</p>
+<p>And the thing is, it's not just the outside. The way you carry yourself, the way you speak, the warmth you carry — it all adds to it. True beauty isn't just what you see. It's what you feel when someone walks in. And when you walk in, Jann, there's something that lifts in me.</p>
+<p>So no, "pretty" doesn't cover it. You are something more than that. Something that makes ordinary words feel too small.</p>
+<p>But for now — you're breathtaking. That'll have to do. 🌺💗</p>`
+  },
+  {
+    emojis: "🖤✨🌸🖤✨🌸🖤✨🌸🖤✨🌸🖤✨🌸🖤✨",
+    title: "That Hair Though 🖤",
+    salutation: "Jann,",
+    topbar: "linear-gradient(90deg,#90ee90,#a8f0d8,#90ee90)",
+    closing: "— your hair's biggest fan 🌹",
+    tag: "🖤 effortless always 🖤",
+    body: `<p>Okay. Your hair. We need to talk about your hair.</p>
+<p>Whether it's left loose and flowing, or tied back, or whatever new thing you've done with it that day — it always, somehow, looks exactly right. Like it knows what it's doing. Like it got the memo.</p>
+<p>There's something about the way it moves when you walk. Or the way a strand falls across your face and you push it back without thinking. These are tiny, ordinary moments — and somehow they're some of the most beautiful things I've ever seen.</p>
+<p>Good hair is one thing. But hair that suits a person — that feels like an extension of who they are — that's rare. And yours is just that. Effortlessly, naturally, perfectly yours.</p>
+<p>I don't think you even fully know how nice it looks. Which, honestly, is part of the charm. 🖤✨</p>`
+  },
+  {
+    emojis: "🎵🎶💗🎵🎶💗🎵🎶💗🎵🎶💗🎵🎶💗",
+    title: "Your Sound 🎵",
+    salutation: "My favourite sound,",
+    topbar: "linear-gradient(90deg,#ffb6c1,#ff9de2,#ffb6c1)",
+    closing: "— always listening 🌹",
+    tag: "🎵 my favourite sound 🎵",
+    body: `<p>I don't think you know what your voice sounds like to me.</p>
+<p>It's soft but it carries. Warm. Like the first few notes of a song you forgot you loved — and then you hear it again, and something in your chest settles. Like, <em>oh. Yes. This.</em></p>
+<p>When you laugh — I mean really laugh — it's one of the best things I've ever heard. It's genuine in a way that makes other sounds feel rehearsed. It doesn't perform. It just is.</p>
+<p>And when you say my name — even casually, even in passing — it sounds different than when anyone else says it. I don't know how to explain that. It just does.</p>
+<p>Your voice is one of my favourite things about you. I'd listen to it forever. Talking, laughing, telling me something random at midnight, disagreeing with me about something entirely unimportant — any version. All versions.</p>
+<p>It's just really, really nice, Jann. Your sound. It's home. 🎵💗</p>`
+  },
+  {
+    emojis: "💗🌟💗🌟💗🌟💗🌟💗🌟💗🌟💗🌟💗🌟",
+    title: "All the Effort 💗",
+    salutation: "Janiya,",
+    topbar: "linear-gradient(90deg,#ffa07a,#ffb347,#ffa07a)",
+    closing: "— grateful, always 🌹",
+    tag: "💗 seen and loved 💗",
+    body: `<p>I want you to know that I notice. I notice everything.</p>
+<p>The effort you put in — not the loud, obvious kind, but the quiet, steady, every-single-day kind. The kind that doesn't ask for applause. The kind that just shows up, over and over, because you care.</p>
+<p>I see it in the little things. The way you check in. The way you remember. The way you show up even when it's not convenient, even when you're tired, even when nobody would blame you for not trying that hard.</p>
+<p>Do you know how rare that is? In a world where people give up easily and love casually — you choose to put in the work. You choose to actually be there. And that means more to me than I think I've ever properly said.</p>
+<p>So let me say it now, properly, in a birthday letter that you can read again whenever you forget: the effort you put in is seen, felt, and treasured. Every single bit of it.</p>
+<p>You are not taken for granted. You never will be. 💗</p>`
+  },
+  {
+    emojis: "📱✨😂📱✨😂📱✨😂📱✨😂📱✨😂",
+    title: "The Reels Expert 📱",
+    salutation: "Jann, researcher of the internet,",
+    topbar: "linear-gradient(90deg,#b0e0e6,#aadeff,#b0e0e6)",
+    closing: "— your biggest reel recipient 🌹",
+    tag: "📱 algorithm queen 📱",
+    body: `<p>Let's be honest about something. You have watched more reels than any person should be legally allowed to watch. You have seen things on that app that no one asked you to see and yet somehow you always find the exact right video at the exact right time.</p>
+<p>"Wait, watch this." — and then it's something hilarious, or something sweet, or something so oddly specific to your current mood that it feels suspicious. How does the algorithm know you, Jann? What did you agree to?</p>
+<p>But also — you always send them to me. The funny ones, the cute ones, the ones that remind you of me, the ones that make you think we should try this, go here, eat this. And each one is like a little window into what's going on in your head.</p>
+<p>It's actually lovely. Your little reel-watching, screen-scrolling self — I adore her completely.</p>
+<p>Just maybe put the phone down for five minutes on your birthday. Just five. Then pick it back up. I understand. 📱😂💗</p>`
+  },
+  {
+    emojis: "🌙💫✨🌙💫✨🌙💫✨🌙💫✨🌙💫✨",
+    title: "Our Future 🌙",
+    salutation: "My dreamer, my future,",
+    topbar: "linear-gradient(90deg,#d9aaff,#c8a2c8,#d9aaff)",
+    closing: "— your future, already 🌹",
+    tag: "🌙 dreaming together 💫",
+    body: `<p>I think about it too. More than you probably know.</p>
+<p>The future. Our future. Not in a vague, maybe-one-day way — but in a specific, detail-filled, <em>I can actually see this</em> kind of way.</p>
+<p>I think about mornings that are ours. A home that smells like something good, where we've memorized every corner, where things are exactly where we put them. I think about evenings where there's nowhere to be and nothing urgent and we're just together, completely, without the noise of everything else.</p>
+<p>I think about the version of us that's been through things. That's built things. That knows each other in the deep, quiet, unshakeable way that only comes from time and choosing each other, over and over again.</p>
+<p>Your fantasy isn't too big, Jann. It's not too much to want. You deserve a love that feels like the best kind of story — warm and real and yours. A future that matches the size of your heart.</p>
+<p>And I want to be in it. Every part of it. 🌙💫</p>`
+  },
+  {
+    emojis: "🍌✨🍌✨🍌✨🍌✨🍌✨🍌✨🍌✨🍌✨",
+    title: "Pazhampozhichal is GOATED 🍌",
+    salutation: "Jann, the uninitiated,",
+    topbar: "linear-gradient(90deg,#ffe4b5,#ffd700,#ffe4b5)",
+    closing: "— your pazhampozhichal advocate 🌹",
+    tag: "🍌 just try it. please. 🍌",
+    body: `<p>I am going to say this with love. Pure, sincere, birthday love.</p>
+<p><strong>You need to try Pazhampozhichal.</strong></p>
+<p>I know. I know you don't like it. I know you've made a face at it. I know somewhere in your mind it has been placed in the "no" category along with other things that don't deserve that category. But Jann — listen to me — it is goated. Capital G. All letters.</p>
+<p>The way the banana gets all soft and sweet. The slight crispiness on the outside. The way it tastes like something your grandmother's kitchen smells like — warm and rich and just right. It is a masterpiece and I will not hear otherwise.</p>
+<p>All I'm asking is one bite. One proper, committed bite. Not a suspicious half-nibble. A real bite. And then you are allowed to have your opinion.</p>
+<p>But I have a strong feeling — a very strong feeling — that the opinion will change.</p>
+<p>This is my birthday gift to you. The truth about Pazhampozhichal. You're welcome. 🍌✨</p>`
+  },
+  {
+    emojis: "🌸✨💗🌸✨💗🌸✨💗🌸✨💗🌸✨💗",
+    title: "A Poem for Janiya 🌸",
+    salutation: "For you,",
+    topbar: "linear-gradient(90deg,#ff69b4,#ff9de2,#ff69b4)",
+    closing: "— written only for you 🌹",
+    tag: "🌸 always yours 🌸",
+    poem: true,
+    body: `<p><span class="poem-line">She arrives like a season changing —</span>
+<span class="poem-line">not loudly, not with announcement,</span>
+<span class="poem-line">just a warmth that wasn't there before</span>
+<span class="poem-line">and now cannot be unfelt.</span></p>
+<p><span class="poem-line">She laughs with her whole self,</span>
+<span class="poem-line">loves with a quietness that lands heavy,</span>
+<span class="poem-line">remembers the things you said once</span>
+<span class="poem-line">and holds them like something precious.</span></p>
+<p><span class="poem-line">Her name is soft in the mouth —</span>
+<span class="poem-line">Janiya —</span>
+<span class="poem-line">three syllables that mean</span>
+<span class="poem-line">home, and warmth, and <em>her.</em></span></p>
+<p><span class="poem-line">There are girls like weather, like seasons —</span>
+<span class="poem-line">and then there are girls like Janiya,</span>
+<span class="poem-line">who are more like something constant.</span>
+<span class="poem-line">Something you return to.</span>
+<span class="poem-line">Something you keep.</span></p>`
+  },
+  {
+    emojis: "🐦🎵💗🐦🎵💗🐦🎵💗🐦🎵💗🐦🎵💗",
+    title: "Voice Like a Koyal 🎵",
+    salutation: "For her voice,",
+    topbar: "linear-gradient(90deg,#7ec8e3,#aadeff,#7ec8e3)",
+    closing: "— always listening 🌹",
+    tag: "🐦 koyal voice forever 🎵",
+    poem: true,
+    body: `<p><span class="poem-line">The koyal sings before the rain,</span>
+<span class="poem-line">a sound so pure the world goes still —</span>
+<span class="poem-line">the leaves lean in, the breeze holds its breath,</span>
+<span class="poem-line">the morning stops against its will.</span></p>
+<p><span class="poem-line">And she speaks —</span>
+<span class="poem-line">and it is the same.</span>
+<span class="poem-line">Something in the air rearranges.</span>
+<span class="poem-line">Something settles. Something warms.</span></p>
+<p><span class="poem-line">The koyal doesn't know it sings for anyone —</span>
+<span class="poem-line">it just opens its throat and gives the gift.</span>
+<span class="poem-line">And she talks, and laughs, and says my name,</span>
+<span class="poem-line">and the whole room shifts.</span></p>
+<p><span class="poem-line">I have heard songs, and birds, and rivers —</span>
+<span class="poem-line">I have heard rain on summer leaves.</span>
+<span class="poem-line">But none of it, not one note,</span>
+<span class="poem-line">sounds as good as her to me.</span></p>`
+  },
+  {
+    emojis: "🦌✨🌿🦌✨🌿🦌✨🌿🦌✨🌿🦌✨🌿",
+    title: "Kiran the Hiran 🦌",
+    salutation: "My little deer,",
+    topbar: "linear-gradient(90deg,#f4a460,#ffb347,#f4a460)",
+    closing: "— your forest boy 🌹",
+    tag: "🦌 hiran forever 🦌",
+    body: `<p>Okay so. There is a reason I call you this. A very real, very accurate reason.</p>
+<p>You move like a deer. This is a compliment — please hear it as one. There's a lightness to you, an elegance even in quick moments, this delicate energy that somehow also manages to be full of life at the same time. A deer doesn't lumber around. A deer moves with purpose and grace and a little bit of I-can-bolt-at-any-moment-so-don't-try-me energy.</p>
+<p>That's you. Janiya, my Kiran the Hiran.</p>
+<p>Wide eyes — check. (You have the most expressive eyes, we covered this in letter 7.) Moves quickly when she wants to — check. Can disappear into her own world when she feels like it — absolutely check. Somehow makes everything look graceful — check check check.</p>
+<p>Deers are also one of the most beautiful animals. Gentle but not weak. Soft but aware. Present in the moment.</p>
+<p>You are all of those things, jann. My hiran. My graceful, bright, beautiful girl. 🦌💗</p>`
+  },
+  {
+    emojis: "💸😂💸😂💸😂💸😂💸😂💸😂💸😂",
+    title: "Please Spend Some Money 💸",
+    salutation: "My extremely financially responsible girlfriend,",
+    topbar: "linear-gradient(90deg,#d8bfd8,#c8a2c8,#d8bfd8)",
+    closing: "— your financial advisor (not really) 🌹",
+    tag: "💸 spend it jann. please. 💸",
+    body: `<p>Jann. Jan jan jan jan.</p>
+<p>I say this with tremendous love and also a little bit of genuine concern: you are the most kanjoos person I have ever met in my life.</p>
+<p>You will find a 10 rupee difference between two things and choose the cheaper one. You will calculate the per-unit cost of something at 11pm. You have probably, at some point, convinced yourself that you "don't really need" something that you very clearly needed and also wanted.</p>
+<p>And look — being smart with money is good! Being sensible is admirable! But Jann, babe, sweetheart, my love — it is your <strong>birthday.</strong> The one day of the year where you are cosmically, spiritually, legally allowed to just spend a little.</p>
+<p>Get the thing. The nice thing. The one you've been looking at and putting back. Buy it. This letter is permission. Official birthday permission to be slightly, mildly, just a tiny bit less kanjoos for one single day.</p>
+<p>You've earned it. Spend it. I believe in you. 💸😂💗</p>`
+  },
+  {
+    emojis: "👑🌸💗✨🌟💫🌸💗✨🌟💫👑🌸💗✨🌟💫🌸💗✨🌟💫👑",
+    title: "Happy Birthday, Janiya 👑",
+    salutation: "To the most important person,",
+    topbar: "linear-gradient(90deg,#ffd700,#ff9de2,#ffd700,#ff9de2,#ffd700)",
+    closing: "— forever yours 🌹",
+    tag: "💗 21 letters. all for you. 💗",
+    body: `<p>heheheheh. you made it. you read all of them.</p>
+<p>(or you skipped ahead to this one — which honestly, very on-brand, and I still love you.)</p>
+<p>So. Here we are. Letter 21. The last one. And I could write something elaborate and poetic again — but I think for this one, I just want to say it simply.</p>
+<p>You are the best. Not in a casual way. Not in an "oh you're great" way. In the real, specific, I-mean-every-word way. You are funny and beautiful and hardworking and soft and strong and a little bit chaotic in the best possible sense. You love dosa and you watch too many reels and you're probably going to be a CMA and you have a dream house in India and you bought me Hotwheels and your eyes are everything and your voice is home.</p>
+<p>You are everything, Janiya.</p>
+<p>I hope this birthday is everything — full of the people who love you, the food that makes you happy, the moments that make you feel like yourself. I hope you feel celebrated and seen and adored today, because you are. So incredibly much.</p>
+<p><em>Happy Birthday, my love. My kanmani. My kiran the hiran. My honey pumpkin. My favourite person.</em></p>
+<p>Here's to you. 👑🌸💗</p>`
+  }
+];
+
+// ===== ENVELOPE COLORS =====
+const envColors = [
+  '#ff9de2','#ffb347','#ff6b9d','#a8d8ea','#ffd700',
+  '#98fb98','#ff8c94','#dda0dd','#87ceeb','#f08080',
+  '#90ee90','#ffb6c1','#b0e0e6','#ffa07a','#c8a2c8',
+  '#ffe4b5','#ff69b4','#7ec8e3','#f4a460','#d8bfd8','#ffd700'
+];
+
+// ===== BUILD ENVELOPES =====
+const grid = document.getElementById('envGrid');
+const openedSet = new Set();
+
+letters.forEach((_, i) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'env-wrap';
+  wrap.dataset.idx = i;
+
+  const col = envColors[i];
+  const darker = shadeColor(col, -25);
+  const lighter = shadeColor(col, 30);
+
+  wrap.innerHTML = `
+    <div class="envelope">
+      <div class="check-mark">✓</div>
+      <svg viewBox="0 0 110 82" xmlns="http://www.w3.org/2000/svg">
+        <!-- body -->
+        <rect x="2" y="18" width="106" height="62" rx="5" fill="${col}" stroke="${darker}" stroke-width="1.5"/>
+        <!-- bottom fold lines -->
+        <path d="M2 80 L55 48 L108 80" fill="${lighter}" opacity="0.6"/>
+        <!-- left flap -->
+        <path d="M2 18 L55 48 L2 80" fill="${shadeColor(col,-10)}" opacity="0.85"/>
+        <!-- right flap -->
+        <path d="M108 18 L55 48 L108 80" fill="${shadeColor(col,-10)}" opacity="0.85"/>
+        <!-- top flap (closed) -->
+        <path d="M2 18 L55 50 L108 18 Q106 14 102 14 L8 14 Q4 14 2 18Z" fill="${shadeColor(col,-15)}" stroke="${darker}" stroke-width="1"/>
+        <!-- heart seal -->
+        <text x="55" y="54" text-anchor="middle" font-size="11" fill="white" opacity="0.9">💌</text>
+        <!-- number -->
+        <text x="55" y="35" text-anchor="middle" font-size="10" fill="white" font-family="Dancing Script,cursive" font-weight="700" opacity="0.95">${i+1}</text>
+      </svg>
+    </div>
+    <div class="env-label">Letter ${i+1}</div>
+  `;
+
+  wrap.addEventListener('click', () => openLetter(i, wrap));
+  grid.appendChild(wrap);
+});
+
+function shadeColor(hex, pct) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.max(0,Math.min(255, (n>>16)+pct));
+  const g = Math.max(0,Math.min(255, ((n>>8)&0xff)+pct));
+  const b = Math.max(0,Math.min(255, (n&0xff)+pct));
+  return `#${((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)}`;
+}
+
+// ===== PARTICLES =====
+(function buildParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#ff9de2','#ffd6a5','#a8f0d8','#aadeff','#d9aaff','#ffd700','#ffb6c1'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 6 + Math.random() * 14;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${8+Math.random()*12}s;
+      animation-delay:${-Math.random()*20}s;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// ===== SPARKLE ON CLICK =====
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.env-wrap') || e.target.closest('#modal')) {
+    const emojis = ['✨','🌸','💗','⭐','🌟','💫'];
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    s.style.cssText = `left:${e.clientX-16}px; top:${e.clientY-16}px; position:fixed; z-index:9999; pointer-events:none;`;
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 900);
+  }
+});
+
+// ===== AUDIO =====
+const audio = document.getElementById('audioPlayer');
+const musicBar = document.getElementById('musicBar');
+const songLabel = document.getElementById('songLabel');
+let currentSong = -1;
+
+function playSong(idx) {
+  const n = idx + 1;
+  if (currentSong === idx) return;
+  currentSong = idx;
+  audio.src = `song${n}.mp3`;
+  audio.loop = true;
+  audio.volume = 0.55;
+  const playPromise = audio.play();
+  if (playPromise) {
+    playPromise.then(() => {
+      musicBar.classList.add('visible');
+      songLabel.textContent = `playing song ${n}`;
+    }).catch(() => {
+      // autoplay blocked — show a play hint
+      musicBar.classList.add('visible');
+      songLabel.textContent = `🔇 tap to enable music`;
+      musicBar.style.cursor = 'pointer';
+      musicBar.onclick = () => { audio.play(); musicBar.onclick = null; musicBar.style.cursor='default'; songLabel.textContent=`playing song ${n}`; };
+    });
+  }
+}
+
+// ===== OPEN LETTER =====
+function openLetter(idx, wrapEl) {
+  const data = letters[idx];
+
+  // mark opened
+  openedSet.add(idx);
+  if (wrapEl) wrapEl.classList.add('opened');
+
+  // build content
+  const bodyClass = data.poem ? 'l-body poem-body' : 'l-body';
+  document.getElementById('letterContent').innerHTML = `
+    <div class="letter-num-badge">Letter ${idx+1} of 21</div>
+    <div class="l-emojis">${data.emojis}</div>
+    <div class="l-title">${data.title}</div>
+    <div class="l-stars">✦ ✦ ✦</div>
+    <hr class="l-divider">
+    <span class="l-salutation">${data.salutation}</span>
+    <div class="${bodyClass}">${data.body}</div>
+    <div class="l-footer">
+      <span class="l-closing">${data.closing}</span>
+      <span class="l-tag">${data.tag}</span>
+    </div>
+  `;
+
+  // set top bar color
+  document.getElementById('letterCard').style.setProperty('--topbar', data.topbar);
+
+  // show modal
+  const modal = document.getElementById('modal');
+  modal.classList.add('active');
+  modal.scrollTop = 0;
+
+  // play song
+  playSong(idx);
+}
+
+// ===== CLOSE =====
+document.getElementById('closeBtn').addEventListener('click', closeModal);
+document.getElementById('backBtn').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
